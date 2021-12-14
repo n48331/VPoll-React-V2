@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState,useEffect}from 'react';
+import Nopoll from './Pages/Nopoll';
+import Stats from './Pages/Stats';
+import Home from './Pages/Home';
+import Login from './Pages/Login';
+import Navs from './Components/Navs';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom'
+import axios from 'axios';
+axios.defaults.baseURL = 'http://127.0.0.1:8000/api/'
+
+
+
+ 
+function App()  {
+  const [token, setToken] = useState();
+  const [logged, setLogged] = useState();
+
+  useEffect(()=>{
+      (
+          
+          async()=>{
+          setToken(localStorage.getItem('token'))
+              if(token){
+                  setLogged(true)
+              }else{
+                  setLogged(false)
+              }
+
+          }
+      )()
+  })
+    return ( 
+      <div className = 'container-fluid'>
+      <Router>
+      <Navs logged={logged} setLogged={setLogged}/>
+        <Routes>
+        <Route/>
+          <Route path = '/' element={<Login/>}/> 
+          <Route path = '/home' element={<Home logged={logged} token={token}/>}/> 
+          <Route path = '/notpolled' element={<Nopoll/>}/>
+          <Route exact path = '/stats' element={<Stats/>}/>
+          <Route exact path = '/login' element={<Login setLogged={setLogged}/>}/>
+        </Routes>
+  
+      </Router>
+      </div>
+     );
+
 }
-
+ 
 export default App;
