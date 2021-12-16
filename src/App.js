@@ -46,7 +46,6 @@ function App()  {
               axios.get('voters-list/',header).then(res=>{
                 const allData = res.data;
                 setList(allData)
-                  console.log(list);
                 const allPolled = allData.filter(item=>item.polled===true)
                 const allNotPolled = allData.filter(item=>item.polled===false)
                 setPolled(allPolled.length);
@@ -74,7 +73,10 @@ function App()  {
            list={list} polled={polled} allCount={allCount}
             />}/> 
           <Route path = '/notpolled' element={<Nopoll  notList={notList} />}/>
-          <Route exact path = '/stats' element={<Stats/>}/>
+          <Route exact path = '/stats' element={<Stats
+            polled={polled} 
+            allCount={allCount}
+          />}/>
           <Route exact path = '/login' element={<Login setLogged={setLogged}/>}/>
         </Routes>
   

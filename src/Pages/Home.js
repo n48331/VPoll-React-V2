@@ -1,6 +1,6 @@
-import React,{useEffect,useState} from "react";
+import React,{useState} from "react";
 import axios from "axios";
-import { Accordion,Card,InputGroup,FormControl,ProgressBar } from 'react-bootstrap';
+import { Accordion,Card,InputGroup,FormControl,ProgressBar,Badge } from 'react-bootstrap';
 import BackToTop from "react-back-to-top-button";
 import { ArrowUpCircleFill as Up } from 'react-bootstrap-icons';
 import Toggle from 'react-toggle'
@@ -26,13 +26,13 @@ const Home=(props)=>{
     return(
         <div>
         <div className='row'>
-        <style>{'body { background-color: 	#000000; }'}</style>
+        <style>{'body { background-color: 	#76def6; }'}</style>
           <div className ='col-md-12'>
           <ProgressBar variant='custom' animated  now={props.polled} 
           
             label={props.polled}
             max ={props.allCount}
-             style={{ background:'#f67280',color:'#f67280'}}
+             style={{ background:'#ec1c4b'}}
           />
       <InputGroup className="mb-3" material>
 
@@ -47,29 +47,28 @@ const Home=(props)=>{
 
   </InputGroup>
 
-          <Accordion >
+          <Accordion style={{ color:'red' }}>
 
                 {props.list?
                   props.list.filter(filterFunction).map((itm,ky) => (
-                    <Card bg="primary" style={{ background: itm.polled ? '#3eaca8' : '#f67280', }}>
+
+                    <Card >
     
-    <Accordion.Item  eventKey={itm.id} style={{ background: itm.polled ? '#3eaca8' : '#f67280' }}>
-    <Accordion.Header >
-    <Card.Body style={{ textDecorationLine: itm.polled ? 'line-through' : '',color:itm.polled ?'green':'red' }}>
-    <span className='btn-dark p-2 mr2'>{itm.sl}</span>
-     <b> <span className='text-uppercase'>
-      {itm.name}
+    <Accordion.Item  eventKey={itm.id} >
+    <Card.Header style={{ background: itm.polled ? '#3eaca8' : '#f67280' }}>
+    <Accordion.Header  style={{ textDecorationLine: itm.polled ? 'line-through' : '',color:itm.polled ?'#000000':'#ec1c4b', }}>
+    <span style={{ background: itm.polled ? '#2f9395' : '#ec1c4b', }} className='btn-dark p-2' >{itm.sl}</span>
+     <b> <span  className='text-uppercase'  >
+     &nbsp; &nbsp; {itm.name}
        </span> </b>
        <span>
         : {itm.house}
        </span>
-       </Card.Body>
        </Accordion.Header>
-       
+       </Card.Header>
     <Accordion.Body>
     Polled:
-      
-      <Toggle
+      <Toggle 
   id={ String(itm.id) }
   checked={itm.polled}
   onChange={pollFunction}    
@@ -82,7 +81,10 @@ const Home=(props)=>{
                 
                 }
             </Accordion>
-
+                    {/* <Card bg="primary"  style={{ background: itm.polled ? '#2f9395' : '#ec1c4b', }}>
+    <Card.Body  style={{ textDecorationLine: itm.polled ? 'line-through' : '',color:itm.polled ?'#000000':'#ec1c4b', }} >
+    </Card.Body>
+    </Card> */}
 
           </div>
           <BackToTop

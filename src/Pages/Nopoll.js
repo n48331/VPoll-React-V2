@@ -1,6 +1,6 @@
-import React,{useEffect,useState} from "react";
+import React,{useState} from "react";
 import axios from "axios";
-import { Accordion,Card,InputGroup,FormControl,ProgressBar } from 'react-bootstrap';
+import { Accordion,Card,InputGroup,FormControl } from 'react-bootstrap';
 import BackToTop from "react-back-to-top-button";
 import { ArrowUpCircleFill as Up } from 'react-bootstrap-icons';
 import Toggle from 'react-toggle'
