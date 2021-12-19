@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/vpoll/static/css/main.5ec7d61c.chunk.css",
+    "main.js": "/vpoll/static/js/main.6a6aca33.chunk.js",
+    "main.js.map": "/vpoll/static/js/main.6a6aca33.chunk.js.map",
+    "runtime-main.js": "/vpoll/static/js/runtime-main.7bdccc82.js",
+    "runtime-main.js.map": "/vpoll/static/js/runtime-main.7bdccc82.js.map",
+    "static/css/2.65aefc5a.chunk.css": "/vpoll/static/css/2.65aefc5a.chunk.css",
+    "static/js/2.a1a7f106.chunk.js": "/vpoll/static/js/2.a1a7f106.chunk.js",
+    "static/js/2.a1a7f106.chunk.js.map": "/vpoll/static/js/2.a1a7f106.chunk.js.map",
+    "static/js/3.a225a181.chunk.js": "/vpoll/static/js/3.a225a181.chunk.js",
+    "static/js/3.a225a181.chunk.js.map": "/vpoll/static/js/3.a225a181.chunk.js.map",
+    "index.html": "/vpoll/index.html",
+    "static/css/2.65aefc5a.chunk.css.map": "/vpoll/static/css/2.65aefc5a.chunk.css.map",
+    "static/css/main.5ec7d61c.chunk.css.map": "/vpoll/static/css/main.5ec7d61c.chunk.css.map",
+    "static/js/2.a1a7f106.chunk.js.LICENSE.txt": "/vpoll/static/js/2.a1a7f106.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7bdccc82.js",
+    "static/css/2.65aefc5a.chunk.css",
+    "static/js/2.a1a7f106.chunk.js",
+    "static/css/main.5ec7d61c.chunk.css",
+    "static/js/main.6a6aca33.chunk.js"
+  ]
+}
