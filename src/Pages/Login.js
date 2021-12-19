@@ -3,6 +3,7 @@ import axios from 'axios';
 import React ,{useState}from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router';
+import { Form,Button,FloatingLabel, } from 'react-bootstrap';
 
 
 export default function Login (props) {
@@ -24,9 +25,9 @@ export default function Login (props) {
     .catch(err=>{console.log(err);})
   }
     return (    
-    <div className="login-wrapper">Login
+    <div >
 
-    <form onSubmit={login}>
+    {/* <form onSubmit={login}>
   <label>
     <p>Username</p>
     <input type="text" onChange={(e)=>{setUsername(e.target.value)} } />
@@ -38,7 +39,32 @@ export default function Login (props) {
   <div>
     <button type="submit">Submit</button>
   </div>
-</form>
+</form> */}
+
+<Form onSubmit={login}>
+
+<br/>
+<br/>
+
+  <>
+  <FloatingLabel
+    controlId="floatingInput"
+    label="Username"
+    className="mb-3"
+  >
+    <Form.Control type="text" placeholder="name" onChange={(e)=>{setUsername(e.target.value)} } />
+  </FloatingLabel>
+  <FloatingLabel controlId="floatingPassword" label="Password">
+    <Form.Control type="password" placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}} />
+  </FloatingLabel>
+</>
+
+<br/>
+  <Button variant="primary" type="submit">
+    Submit
+  </Button>
+</Form>
+
 
     </div> )
 

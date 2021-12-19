@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import axios from "axios";
-import { Accordion,Card,InputGroup,FormControl } from 'react-bootstrap';
+import { Accordion,Card,InputGroup,FormControl,Spinner,Button } from 'react-bootstrap';
 import BackToTop from "react-back-to-top-button";
 import { ArrowUpCircleFill as Up } from 'react-bootstrap-icons';
 import Toggle from 'react-toggle'
@@ -25,7 +25,7 @@ const Nopoll=(props)=>{
     return(
         <div>
         <div className='row'>
-        <style>{'body { background-color: 	#000000; }'}</style>
+        <style>{'body { background-color: 	#76def6; }'}</style>
           <div className ='col-md-12'>
       <InputGroup className="mb-3" material>
 
@@ -33,48 +33,73 @@ const Nopoll=(props)=>{
     className='btn-dark p-2 mr2'
       aria-label="Default"
       aria-describedby="inputGroup-sizing-default"
-      placeholder="Search Something...."
+      placeholder="search here...."
       value={search}
       onChange={(e)=>{setSearch(e.target.value)}}
     />
 
   </InputGroup>
 
-          <Accordion >
+     
+          <Accordion style={{ color:'red' }}>
 
                 {props.notList?
-                  props.notList.filter(filterFunction).map((itm,ky) => (
-                    <Card bg="primary" style={{ background: itm.polled ? '#3eaca8' : '#f67280', }}>
+                  props.notList.filter(filterFunction).map(itm => (
+
+                    <Card >
     
-    <Accordion.Item  eventKey={itm.id} style={{ background: itm.polled ? '#3eaca8' : '#f67280' }}>
-    <Accordion.Header >
-    <Card.Body style={{ textDecorationLine: itm.polled ? 'line-through' : '',color:itm.polled ?'green':'red' }}>
-    <span className='btn-dark p-2 mr2'>{itm.sl}</span>
-     <b> <span className='text-uppercase'>
-      {itm.name}
+    <Accordion.Item  eventKey={itm.id} >
+    <Card.Header style={{ background: itm.polled ? '#3eaca8' : '#f67280' }}>
+    <Accordion.Header  style={{ textDecorationLine: itm.polled ? 'line-through' : '',color:itm.polled ?'#000000':'#ec1c4b', }}>
+    <span style={{ background: itm.polled ? '#2f9395' : '#ec1c4b', }} className='btn-dark p-2' >{itm.sl}</span>
+     <b> <span  className='text-uppercase'  >
+     &nbsp; &nbsp; {itm.name}
        </span> </b>
        <span>
-        : {itm.house}
+        : {itm.house} 
        </span>
-       </Card.Body>
        </Accordion.Header>
+       </Card.Header>
+
+
+       {props.loggedNopoll?
        
-    <Accordion.Body>
-    Polled:
+       
+       <Accordion.Body>
+   Polled:
+     <Toggle 
+ id={ String(itm.id) }
+ checked={itm.polled}
+ onChange={pollFunction}    
+ /> 
+   </Accordion.Body>
       
-      <Toggle
-  id={ String(itm.id) }
-  checked={itm.polled}
-  onChange={pollFunction}    
-  /> 
-    </Accordion.Body>
+      :
+      
+<div></div>
+      }
     
+
+
   </Accordion.Item>
   </Card>
-                )):"loading"
+                )):
+                
+                
+                <Button variant="primary" disabled>
+    <Spinner
+      as="span"
+      animation="grow"
+      size="sm"
+      role="status"
+      aria-hidden="true"
+    />
+    Loading...
+  </Button>
                 
                 }
             </Accordion>
+
 
 
           </div>

@@ -9,7 +9,9 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import faker from 'faker';
+import {Card,Button} from 'react-bootstrap';
+import { useNavigate } from 'react-router';
+
 
 ChartJS.register(
   CategoryScale,
@@ -33,25 +35,11 @@ export const options = {
   },
 };
 
-const labels = ['Status'];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Polled',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Not Polled',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
 
 export default function Stats(props) {
+  const navigate = useNavigate()
+
     const labels = ['Status'];
     const data = {
         labels,
@@ -59,17 +47,33 @@ export default function Stats(props) {
           {
             label: 'Polled',
             data:[props.polled],
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
           },
           {
             label: 'Not Polled',
             data: [props.allCount - props.polled],
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
           },
         ],
       };
-  return <Bar options={options}
+  return (<div>
+  <Bar options={options}
    data={data} 
+   />
 
-   />;
+<Card>
+  <Card.Header>Remaining to be Polled</Card.Header>
+  <Card.Body>
+    <Card.Title>{props.allCount - props.polled}</Card.Title>
+    <Button 
+    onClick={()=>{navigate('/notpolled')}} variant="primary">
+    View</Button>
+  </Card.Body>
+</Card>
+
+
+
+   </div>
+   )
+   
 }

@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import axios from "axios";
-import { Accordion,Card,InputGroup,FormControl,ProgressBar,Badge } from 'react-bootstrap';
+import { Accordion,Card,InputGroup,FormControl,ProgressBar,Spinner,Button} from 'react-bootstrap';
 import BackToTop from "react-back-to-top-button";
 import { ArrowUpCircleFill as Up } from 'react-bootstrap-icons';
 import Toggle from 'react-toggle'
@@ -26,12 +26,12 @@ const Home=(props)=>{
     return(
         <div>
         <div className='row'>
-        <style>{'body { background-color: 	#76def6; }'}</style>
+        <style>{'body { background-color: #76def6; }'}</style>
           <div className ='col-md-12'>
           <ProgressBar variant='custom' animated  now={props.polled} 
           
             label={props.polled}
-            max ={props.allCount}
+            max ={props.allCountHome}
              style={{ background:'#ec1c4b'}}
           />
       <InputGroup className="mb-3" material>
@@ -40,7 +40,7 @@ const Home=(props)=>{
     className='btn-dark p-2 mr2'
       aria-label="Default"
       aria-describedby="inputGroup-sizing-default"
-      placeholder="Search Something...."
+      placeholder="search here...."
       value={search}
       onChange={(e)=>{setSearch(e.target.value)}}
     />
@@ -50,7 +50,7 @@ const Home=(props)=>{
           <Accordion style={{ color:'red' }}>
 
                 {props.list?
-                  props.list.filter(filterFunction).map((itm,ky) => (
+                  props.list.filter(filterFunction).map(itm => (
 
                     <Card >
     
@@ -62,11 +62,15 @@ const Home=(props)=>{
      &nbsp; &nbsp; {itm.name}
        </span> </b>
        <span>
-        : {itm.house}
+        : {itm.house} 
        </span>
        </Accordion.Header>
        </Card.Header>
-    <Accordion.Body>
+
+       {props.loggedHome?
+       
+       
+        <Accordion.Body>
     Polled:
       <Toggle 
   id={ String(itm.id) }
@@ -74,17 +78,32 @@ const Home=(props)=>{
   onChange={pollFunction}    
   /> 
     </Accordion.Body>
+       
+       :
+       
+<div></div>
+       }
+    
+    
+
     
   </Accordion.Item>
   </Card>
-                )):"loading"
+                )):
+
+                <Button variant="primary" disabled>
+    <Spinner
+      as="span"
+      animation="grow"
+      size="sm"
+      role="status"
+      aria-hidden="true"
+    />
+    Loading...
+  </Button>
                 
                 }
             </Accordion>
-                    {/* <Card bg="primary"  style={{ background: itm.polled ? '#2f9395' : '#ec1c4b', }}>
-    <Card.Body  style={{ textDecorationLine: itm.polled ? 'line-through' : '',color:itm.polled ?'#000000':'#ec1c4b', }} >
-    </Card.Body>
-    </Card> */}
 
           </div>
           <BackToTop

@@ -11,7 +11,7 @@ import {
   Route,
 } from 'react-router-dom'
 import axios from 'axios';
-axios.defaults.baseURL = 'http://127.0.0.1:8000/api/'
+axios.defaults.baseURL = 'https://vpollapi.pythonanywhere.com/api/'
 
 
 
@@ -26,24 +26,14 @@ function App()  {
   const [notList, setnotList] = useState();
 
 
+
   useEffect(()=>{
       (
           
           async()=>{
-          setToken(localStorage.getItem('token'))
-              if(token){
-                  setLogged(true)
-              }else{
-                  setLogged(false)
-              }
 
-              let header = {
-                headers: {
-                  'Authorization': `token ${token}`
-                }
-              }
               const interval = setInterval(() => {
-              axios.get('voters-list/',header).then(res=>{
+              axios.get('voters-list/').then(res=>{
                 const allData = res.data;
                 setList(allData)
                 const allPolled = allData.filter(item=>item.polled===true)
@@ -51,16 +41,28 @@ function App()  {
                 setPolled(allPolled.length);
                 setAllCount(res.data.length);
                 setnotList(allNotPolled)
-    
               }).catch(err=>{
                   console.log('Error');
               })
-            }, 3000);
+            }, 5000);
             return () => clearInterval(interval);
 
           }
       )()
   },[])
+
+
+  useEffect(()=>{
+    (
+      async()=>{
+        setToken(localStorage.getItem('token'))
+        if(token)
+        setLogged(true)
+    else
+        setLogged(false)
+      }
+    )()
+  })
     return ( 
       <div className = 'container-fluid'>
       <Router>
@@ -68,16 +70,25 @@ function App()  {
         <Routes>
         <Route/>
           <Route path = '/' element={<Login/>}/> 
+
           <Route path = '/home' 
-          element={<Home logged={logged} token={token}
-           list={list} polled={polled} allCount={allCount}
+          element={<Home token={token}
+          list={list} polled={polled} allCountHome={allCount}
+          loggedHome={logged}
             />}/> 
-          <Route path = '/notpolled' element={<Nopoll  notList={notList} />}/>
+
+          <Route path = '/notpolled' element={
+          <Nopoll  notList={notList}
+          loggedNopoll={logged}
+           />}/>
+
           <Route exact path = '/stats' element={<Stats
             polled={polled} 
             allCount={allCount}
           />}/>
+
           <Route exact path = '/login' element={<Login setLogged={setLogged}/>}/>
+
         </Routes>
   
       </Router>
